@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tamanioLetra">15sp</dimen>
+    <dimen name="paddingBase">20dp</dimen>
+    <dimen name="marginTopBase">25dp</dimen>
+
+</resources>

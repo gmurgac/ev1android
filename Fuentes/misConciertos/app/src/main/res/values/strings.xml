@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">MisConciertos</string>
+    <string name="nombreArtista">Artista</string>
+    <string name="fecha">Fecha</string>
+    <string name="generoMusical">Genero Musical</string>
+    <string name="SeleccioneFecha">Fecha</string>
+    <string name="calificaciontxt">Calificacion</string>
+    <string name="ValorEntradatxt">Valor entrada</string>
+    <string name="registrarTxt">Registrar</string>
+    <string-array name="generosMusicales">
+        <item>Rock</item>
+        <item>Jazz</item>
+        <item>Pop</item>
+        <item>Reguetoon</item>
+        <item>Salsa</item>
+        <item>Metal</item>
+    </string-array>
+    <string-array name="calificaciones">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+
+
+    </string-array>
 </resources>
