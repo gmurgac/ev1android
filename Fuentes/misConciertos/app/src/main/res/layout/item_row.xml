@@ -5,6 +5,7 @@
     android:orientation="vertical"
 
     >
+
     <TextView
         android:id="@+id/txtViewFecha"
         android:layout_width="match_parent"
@@ -27,19 +28,19 @@
             android:layout_height="match_parent"
             android:textAlignment="textStart"
             android:textSize="@dimen/tamanioLetra"
-            android:layout_weight="1"></TextView>
+            android:layout_weight="5"></TextView>
         <TextView
             android:id="@+id/txtViewValorEnt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="@dimen/tamanioLetra"
-            android:layout_weight="1"
+            android:layout_weight="5"
             android:textAlignment="textStart"></TextView>
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:id="@+id/imageView"
-            android:layout_weight=""></ImageView>
+            ></ImageView>
 
 
 

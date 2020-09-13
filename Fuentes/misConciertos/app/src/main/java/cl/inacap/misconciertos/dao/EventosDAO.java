@@ -11,6 +11,9 @@ public class EventosDAO {
     public void add(Evento e){
         eventos.add(e);
     }
+    public List<Evento> getList(){
+        return eventos;
+    }
 
 
 }

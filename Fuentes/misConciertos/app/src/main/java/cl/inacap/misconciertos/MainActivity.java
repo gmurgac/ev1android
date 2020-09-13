@@ -26,22 +26,24 @@ import java.util.List;
 import cl.inacap.misconciertos.dao.EventosDAO;
 import cl.inacap.misconciertos.dto.Evento;
 import cl.inacap.misconciertos.ui.DatePickerFragment;
+import cl.inacap.misconciertos.ui.ListAdapter;
 
 public class MainActivity extends AppCompatActivity {
     private ListView eventosLv;
-    private ArrayAdapter<Evento> eventosAdapter;
+    ListAdapter eventosAdapter;
     private Spinner spinnerGenero;
     private Spinner spinnerCalificacion;
     private Button registrarBtn;
     private EditText calendarioTxt;
     private EditText nombreArtistaTxt;
     private EditText valorEvento;
-    private Evento evento;
-    private EventosDAO eventosDAO;
+
+    private EventosDAO eventosDAO = new EventosDAO();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         this.calendarioTxt = findViewById(R.id.calendarioTxt);
         this.calendarioTxt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         this.nombreArtistaTxt = findViewById(R.id.nombreTxt);
         this.valorEvento = findViewById(R.id.valorEntradaTxt);
         this.eventosLv = findViewById(R.id.eventosLv);
-        //TODO: PASAR EL CUSTOM ADAPTER
-        //this.eventosAdapter = new ArrayAdapter<>(this,eventosDAO,android.R.layout.simple_list_item_1);
+        //TODO: PASAR EL CUSTOM ADAPTER, nose como pero está listo xD
+        this.eventosAdapter = new ListAdapter(this,R.layout.item_row,eventosDAO.getList());
         this.eventosLv.setAdapter(eventosAdapter);
 
         this.spinnerCalificacion = findViewById(R.id.spinnerCalificacion);
@@ -100,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 String calificacionTxt = spinnerCalificacion.getSelectedItem().toString();
 
                 int calificacion = Integer.parseInt(calificacionTxt);
-                //TODO: VALIDAR GENERO Y CALIFICACION (SPINNERS)
+                
 
                 String generoTxt = spinnerGenero.getSelectedItem().toString();
                 if(errores.isEmpty()){
@@ -109,8 +111,10 @@ public class MainActivity extends AppCompatActivity {
                     evento.setFecha(fechaEvento);
                     evento.setGenero(generoTxt);
                     evento.setEntrada(entrada);
-                    evento.setCalificacion(calificacion);
+                    evento.setCalificacion(R.mipmap.ic_launcher);
                     eventosDAO.add(evento);
+                    eventosAdapter.notifyDataSetChanged();
+
                 }else{
                     mostrarErrores(errores);
                 }

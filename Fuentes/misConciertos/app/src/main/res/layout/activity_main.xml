@@ -109,13 +109,21 @@
         android:layout_marginTop="50dp"
         android:text="@string/registrarTxt"
         android:textSize="@dimen/tamanioLetra"></Button>
+        <!-- TODO: hacer que el listview sea parte del scrollview total -->
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/eventosLv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/marginTopBase"
-        ></ListView>
+                <ListView
+                    android:id="@+id/eventosLv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginTopBase"
+                    ></ListView>
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
