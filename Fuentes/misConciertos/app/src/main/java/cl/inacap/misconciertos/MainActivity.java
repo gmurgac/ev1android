@@ -1,13 +1,12 @@
 package cl.inacap.misconciertos;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,17 +16,17 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+
 import java.util.List;
 
 import cl.inacap.misconciertos.dao.EventosDAO;
 import cl.inacap.misconciertos.dto.Evento;
 import cl.inacap.misconciertos.ui.DatePickerFragment;
 import cl.inacap.misconciertos.ui.ListAdapter;
-
+//TODO: TOAST EXITO REGISTRO
 public class MainActivity extends AppCompatActivity {
     private ListView eventosLv;
     ListAdapter eventosAdapter;
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         this.nombreArtistaTxt = findViewById(R.id.nombreTxt);
         this.valorEvento = findViewById(R.id.valorEntradaTxt);
         this.eventosLv = findViewById(R.id.eventosLv);
-        //TODO: PASAR EL CUSTOM ADAPTER, nose como pero está listo xD
+
         this.eventosAdapter = new ListAdapter(this,R.layout.item_row,eventosDAO.getList());
         this.eventosLv.setAdapter(eventosAdapter);
 
@@ -121,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                     evento.setCalificacion(calificacion);
                     eventosDAO.add(evento);
                     eventosAdapter.notifyDataSetChanged();
-
+                    Toast.makeText(MainActivity.this,"Exito registro evento",Toast.LENGTH_SHORT).show();
                 }else{
                     mostrarErrores(errores);
                 }
@@ -148,12 +147,11 @@ public class MainActivity extends AppCompatActivity {
 
         public void onItemSelected(AdapterView<?> parent, View view,
                                    int pos, long id) {
-            // An item was selected. You can retrieve the selected item using
-            // parent.getItemAtPosition(pos)
+
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
-            // Another interface callback
+
         }
     }
 
@@ -161,7 +159,22 @@ public void showDatePickerDialog(final EditText editText){
     DialogFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-            final String selectedDate = day +"/"+(month+1)+"/"+year;
+            String dia;
+            String mes;
+            if(day<10){
+                dia = "0"+String.valueOf(day);
+            }else{
+                dia=String.valueOf(day);
+            }
+            if(month+1<10){
+                mes = "0"+String.valueOf(month+1);
+            }else{
+                mes = String.valueOf(month+1);
+            }
+
+
+
+            final String selectedDate = dia +"/"+mes+"/"+year;
             editText.setText(selectedDate);
         }
     });
