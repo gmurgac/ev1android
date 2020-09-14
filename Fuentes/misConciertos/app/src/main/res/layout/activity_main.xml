@@ -10,10 +10,13 @@
     tools:context=".MainActivity">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        >
         <LinearLayout
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
     <TextView
@@ -102,31 +105,29 @@
 
         ></Spinner>
 
-    <Button
-        android:id="@+id/registrarBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/registrarTxt"
-        android:textSize="@dimen/tamanioLetra"></Button>
+
         <!-- TODO: hacer que el listview sea parte del scrollview total -->
-            <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-                <ListView
-                    android:id="@+id/eventosLv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/marginTopBase"
-                    ></ListView>
-
-            </LinearLayout>
 
 
+            <Button
+                android:id="@+id/registrarBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/registrarTxt"
+                android:textSize="@dimen/tamanioLetra"></Button>
+            <ListView
+                android:id="@+id/eventosLv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginTopBase"
+                android:nestedScrollingEnabled="true"
+
+                ></ListView>
         </LinearLayout>
 
     </ScrollView>
+
+
 
 </LinearLayout>

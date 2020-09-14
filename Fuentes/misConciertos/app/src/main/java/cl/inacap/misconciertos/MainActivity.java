@@ -111,7 +111,14 @@ public class MainActivity extends AppCompatActivity {
                     evento.setFecha(fechaEvento);
                     evento.setGenero(generoTxt);
                     evento.setEntrada(entrada);
-                    evento.setCalificacion(R.mipmap.ic_launcher);
+                    if(calificacion<=3){
+                        calificacion = R.drawable.ic_aburrido;
+                    }else if(calificacion <=5){
+                        calificacion = R.drawable.ic_pulgares;
+                    }else{
+                        calificacion = R.drawable.ic_mano;
+                    }
+                    evento.setCalificacion(calificacion);
                     eventosDAO.add(evento);
                     eventosAdapter.notifyDataSetChanged();
 
