@@ -8,6 +8,7 @@
     <string name="ValorEntradatxt">Valor entrada</string>
     <string name="registrarTxt">Registrar</string>
     <string-array name="generosMusicales">
+        <item>-</item>
         <item>Rock</item>
         <item>Jazz</item>
         <item>Pop</item>
@@ -16,6 +17,7 @@
         <item>Metal</item>
     </string-array>
     <string-array name="calificaciones">
+        <item>-</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>

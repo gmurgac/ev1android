@@ -26,7 +26,7 @@ import cl.inacap.misconciertos.dao.EventosDAO;
 import cl.inacap.misconciertos.dto.Evento;
 import cl.inacap.misconciertos.ui.DatePickerFragment;
 import cl.inacap.misconciertos.ui.ListAdapter;
-//TODO: TOAST EXITO REGISTRO
+
 public class MainActivity extends AppCompatActivity {
     private ListView eventosLv;
     ListAdapter eventosAdapter;
@@ -63,13 +63,13 @@ public class MainActivity extends AppCompatActivity {
         this.eventosLv.setAdapter(eventosAdapter);
 
         this.spinnerCalificacion = findViewById(R.id.spinnerCalificacion);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.calificaciones,android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCalificacion.setAdapter(adapter2);
+        ArrayAdapter<CharSequence> adapterSCalif = ArrayAdapter.createFromResource(this,R.array.calificaciones,android.R.layout.simple_spinner_item);
+        adapterSCalif.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCalificacion.setAdapter(adapterSCalif);
         this.spinnerGenero = findViewById(R.id.idSpinnerGenero);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.generosMusicales,android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerGenero.setAdapter(adapter);
+        ArrayAdapter<CharSequence> adapterSGeneros = ArrayAdapter.createFromResource(this,R.array.generosMusicales,android.R.layout.simple_spinner_item);
+        adapterSGeneros.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerGenero.setAdapter(adapterSGeneros);
         this.registrarBtn = findViewById(R.id.registrarBtn);
         this.registrarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,17 +99,28 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 String calificacionTxt = spinnerCalificacion.getSelectedItem().toString();
+                int calificacion = 0;
+                try{
+                    calificacion = Integer.parseInt(calificacionTxt);
+                }catch (Exception ex){
+                    errores.add("Debe calificar al evento con nota de 1 a 7");
+                }
 
-                int calificacion = Integer.parseInt(calificacionTxt);
-                
 
                 String generoTxt = spinnerGenero.getSelectedItem().toString();
+                if(generoTxt.equalsIgnoreCase("-")){
+                    errores.add("Debe seleccionar el genero musical");
+                }
+
+
+
                 if(errores.isEmpty()){
                     Evento evento = new Evento();
                     evento.setNombreArtista(nombreArtista);
                     evento.setFecha(fechaEvento);
                     evento.setGenero(generoTxt);
                     evento.setEntrada(entrada);
+                    //guardar icono como calificacion
                     if(calificacion<=3){
                         calificacion = R.drawable.ic_aburrido;
                     }else if(calificacion <=5){
@@ -121,6 +132,13 @@ public class MainActivity extends AppCompatActivity {
                     eventosDAO.add(evento);
                     eventosAdapter.notifyDataSetChanged();
                     Toast.makeText(MainActivity.this,"Exito registro evento",Toast.LENGTH_SHORT).show();
+                    //reiniciar campos
+                    nombreArtistaTxt.setText("");
+                    calendarioTxt.setText("");
+                    spinnerGenero.setSelection(0);
+                    spinnerCalificacion.setSelection(0);
+                    valorEvento.setText("");
+
                 }else{
                     mostrarErrores(errores);
                 }
