@@ -29,7 +29,7 @@ import cl.inacap.misconciertos.ui.ListAdapter;
 
 public class MainActivity extends AppCompatActivity {
     private ListView eventosLv;
-    ListAdapter eventosAdapter;
+    private ListAdapter eventosAdapter;
     private Spinner spinnerGenero;
     private Spinner spinnerCalificacion;
     private Button registrarBtn;
@@ -61,13 +61,14 @@ public class MainActivity extends AppCompatActivity {
 
         this.eventosAdapter = new ListAdapter(this,R.layout.item_row,eventosDAO.getList());
         this.eventosLv.setAdapter(eventosAdapter);
-
+        String[] listaCal = new String[]{"-","1","2","3","4","5","6","7"};
         this.spinnerCalificacion = findViewById(R.id.spinnerCalificacion);
-        ArrayAdapter<CharSequence> adapterSCalif = ArrayAdapter.createFromResource(this,R.array.calificaciones,android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapterSCalif = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,listaCal);
         adapterSCalif.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCalificacion.setAdapter(adapterSCalif);
+        String[] listaGen = new String[]{"-","Rock","Jazz","Pop","Regueton","Salsa","Metal"};
         this.spinnerGenero = findViewById(R.id.idSpinnerGenero);
-        ArrayAdapter<CharSequence> adapterSGeneros = ArrayAdapter.createFromResource(this,R.array.generosMusicales,android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapterSGeneros = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,listaGen);
         adapterSGeneros.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGenero.setAdapter(adapterSGeneros);
         this.registrarBtn = findViewById(R.id.registrarBtn);
